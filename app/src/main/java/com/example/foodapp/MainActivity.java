@@ -50,27 +50,27 @@ public class MainActivity extends AppCompatActivity {
                     currentUser = firebaseAuth.getCurrentUser();
                     final String currentUserId = currentUser.getUid();
 
-//                    collectionReference.whereEqualTo("userId",currentUserId)
-//                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                                    if(error != null){
-//                                        return;
-//                                    }
-//                                    String name;
-//
-//                                    if(!value.isEmpty()){
-//                                        for (QueryDocumentSnapshot snapshot : value){
-//                                            JournalApi journalApi = JournalApi.getInstance();
-//                                            journalApi.setUserId(snapshot.getString("userId"));
-//                                            journalApi.setUsername(snapshot.getString("username"));
-//
+                    collectionReference.whereEqualTo("userId",currentUserId)
+                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    if(error != null){
+                                        return;
+                                    }
+                                    String name;
+
+                                    if(!value.isEmpty()){
+                                        for (QueryDocumentSnapshot snapshot : value){
+                                            FoodApi foodApi = FoodApi.getInstance();
+                                            foodApi.setUserId(snapshot.getString("userId"));
+                                            foodApi.setUsername(snapshot.getString("username"));
+
 //                                            startActivity(new Intent(MainActivity.this, JournalListActivity.class));
-//                                            finish();
-//                                        }
-//                                    }
-//                                }
-//                            });
+                                            finish();
+                                        }
+                                    }
+                                }
+                            });
 
 
                 }
