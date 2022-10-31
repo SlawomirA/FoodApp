@@ -22,9 +22,9 @@
 <!--        <activity-->
 <!--            android:name=".PostJournalActivity"-->
 <!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".CreateAccountActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".CreateAccountActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
