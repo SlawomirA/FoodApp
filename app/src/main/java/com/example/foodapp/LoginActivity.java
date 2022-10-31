@@ -39,9 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
-//        binding.btnCreateAccount.setOnClickListener(view -> {
-//            startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
-//        });
+        binding.btnCreateAccount.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+        });
 
         binding.btnLogin.setOnClickListener(view -> {
             loginEmailPasswordUser(binding.etEmail.getText().toString().trim(),
