@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.143" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/activity_create_account.xml" value="0.25025641025641027" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/activity_food_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/activity_journal_list.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/layout/order_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/MICH/FoodApp/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

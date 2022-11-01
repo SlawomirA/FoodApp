@@ -143,7 +143,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        currentUser = auth.getCurrentUser();
-//        auth.addAuthStateListener(authStateListener);
+        currentUser = auth.getCurrentUser();
+        auth.addAuthStateListener(authStateListener);
     }
 }

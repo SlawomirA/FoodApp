@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                                             foodApi.setUserId(snapshot.getString("userId"));
                                             foodApi.setUsername(snapshot.getString("username"));
 
-//                                            startActivity(new Intent(MainActivity.this, JournalListActivity.class));
+                                            startActivity(new Intent(MainActivity.this, FoodListActivity.class));
                                             finish();
                                         }
                                     }
