@@ -42,38 +42,32 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+        authStateListener = firebaseAuth -> {
+            currentUser = firebaseAuth.getCurrentUser();
+            if(currentUser != null){
                 currentUser = firebaseAuth.getCurrentUser();
-                if(currentUser != null){
-                    currentUser = firebaseAuth.getCurrentUser();
-                    final String currentUserId = currentUser.getUid();
+                final String currentUserId = currentUser.getUid();
 
-                    collectionReference.whereEqualTo("userId",currentUserId)
-                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                @Override
-                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                    if(error != null){
-                                        return;
-                                    }
-                                    String name;
+                collectionReference.whereEqualTo("userId",currentUserId)
+                        .addSnapshotListener((value, error) -> {
+                            if(error != null){
+                                return;
+                            }
+                            String name;
 
-                                    if(!value.isEmpty()){
-                                        for (QueryDocumentSnapshot snapshot : value){
-                                            FoodApi foodApi = FoodApi.getInstance();
-                                            foodApi.setUserId(snapshot.getString("userId"));
-                                            foodApi.setUsername(snapshot.getString("username"));
+                            if(!value.isEmpty()){
+                                for (QueryDocumentSnapshot snapshot : value){
+                                    FoodApi foodApi = FoodApi.getInstance();
+                                    foodApi.setUserId(snapshot.getString("userId"));
+                                    foodApi.setUsername(snapshot.getString("username"));
 
-                                            startActivity(new Intent(MainActivity.this, FoodListActivity.class));
-                                            finish();
-                                        }
-                                    }
+                                    startActivity(new Intent(MainActivity.this, FoodListActivity.class));
+                                    finish();
                                 }
-                            });
+                            }
+                        });
 
 
-                }
             }
         };
 

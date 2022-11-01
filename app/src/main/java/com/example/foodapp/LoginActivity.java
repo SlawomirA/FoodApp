@@ -52,41 +52,32 @@ public class LoginActivity extends AppCompatActivity {
     private void loginEmailPasswordUser(String email, String password) {
         binding.loginProgress.setVisibility(View.VISIBLE);
         if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(email)){
-            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                @Override
-                public void onSuccess(AuthResult authResult) {
-                    FirebaseUser user = auth.getCurrentUser();
-                    String currentUserId = user.getUid();
+            auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+                FirebaseUser user = auth.getCurrentUser();
+                String currentUserId = user.getUid();
 
-                    collectionReference.whereEqualTo("userId", currentUserId)
-                            .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                                @Override
-                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                                    //if(error != null);          //unnecessary atm
+                collectionReference.whereEqualTo("userId", currentUserId)
+                        .addSnapshotListener((value, error) -> {
+                            //if(error != null);          //unnecessary atm
 
-                                    assert value != null;
-                                    if(!value.isEmpty()){
-                                        for (QueryDocumentSnapshot snapshot : value){
-                                            FoodApi foodApi = FoodApi.getInstance();
-                                            foodApi.setUsername(snapshot.getString("username"));
-                                            foodApi.setUserId(snapshot.getString("userId"));
+                            assert value != null;
+                            if(!value.isEmpty()){
+                                for (QueryDocumentSnapshot snapshot : value){
+                                    FoodApi foodApi = FoodApi.getInstance();
+                                    foodApi.setUsername(snapshot.getString("username"));
+                                    foodApi.setUserId(snapshot.getString("userId"));
 
-                                            startActivity(new Intent(LoginActivity.this, FoodListActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, FoodListActivity.class));
 
-                                            //finish();
-                                        }
-                                    }
-
+                                    //finish();
                                 }
-                            });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    binding.loginProgress.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Email and/or password are incorrect", Toast.LENGTH_SHORT).show();
+                            }
 
-                }
+                        });
+            }).addOnFailureListener(e -> {
+                binding.loginProgress.setVisibility(View.GONE);
+                Toast.makeText(LoginActivity.this, "Email and/or password are incorrect", Toast.LENGTH_SHORT).show();
+
             });
 
         }

@@ -88,26 +88,22 @@ public class FoodListActivity extends AppCompatActivity {
         collectionReference.whereEqualTo("userId", FoodApi.getInstance()
                     .getUserId())
                     .get()
-                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @SuppressLint("NotifyDataSetChanged")
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            orderList.clear();
-                            if(!queryDocumentSnapshots.isEmpty()){
-                                for (QueryDocumentSnapshot journals : queryDocumentSnapshots){
-                                    Order order = journals.toObject(Order.class);
-                                    orderList.add(order);
-                                }
-
-                                OrderRecyclerAdapter myRecyclerViewAdapter = new OrderRecyclerAdapter(com.example.foodapp.FoodListActivity.this, orderList);
-                                binding.setMyAdapter(myRecyclerViewAdapter);
-//                                journalRecyclerAdapter = new JournalRecyclerAdapter(JournalListActivity.this, journalList);
-//                                binding.rvList.setAdapter(journalRecyclerAdapter);
-//                                journalRecyclerAdapter.notifyDataSetChanged();
-
-                            }else {
-                                binding.tvListNoEntry.setVisibility(View.VISIBLE);
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        orderList.clear();
+                        if(!queryDocumentSnapshots.isEmpty()){
+                            for (QueryDocumentSnapshot journals : queryDocumentSnapshots){
+                                Order order = journals.toObject(Order.class);
+                                orderList.add(order);
                             }
+
+                            OrderRecyclerAdapter myRecyclerViewAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
+                            binding.setMyAdapter(myRecyclerViewAdapter);
+                                orderRecyclerAdapter = new OrderRecyclerAdapter(FoodListActivity.this, orderList);
+                                binding.rvList.setAdapter(orderRecyclerAdapter);
+                                orderRecyclerAdapter.notifyDataSetChanged();
+
+                        }else {
+                            binding.tvListNoEntry.setVisibility(View.VISIBLE);
                         }
                     }).addOnFailureListener(e -> Toast.makeText(com.example.foodapp.FoodListActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
     }
