@@ -17,11 +17,13 @@
         android:theme="@style/Theme.FoodApp"
         tools:targetApi="31">
         <activity
-            android:name=".FoodListActivity"
+            android:name=".OrderingActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".PostJournalActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".FoodListActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".PostJournalActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />
