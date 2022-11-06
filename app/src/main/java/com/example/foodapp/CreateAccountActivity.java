@@ -26,6 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import Model.User;
+
 public class CreateAccountActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseAuth.AuthStateListener authStateListener;
@@ -56,7 +58,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         };
         //btn login to tak naprawdę do zrobienia konta przycisk, zapomniałem id zmienić :/ a potem się już nie dało
         binding.btnLogin.setOnClickListener(view -> {
-         if(!TextUtils.isEmpty(binding.email.getText().toString().trim())
+     if(!TextUtils.isEmpty(binding.email.getText().toString().trim())
              && !TextUtils.isEmpty(binding.etPassword.getText().toString().trim())
              && !TextUtils.isEmpty(binding.etUsername.getText().toString().trim())){
 
@@ -87,15 +89,18 @@ public class CreateAccountActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            //take user to AddJournalActivity
+                            //take user to order activity
                             currentUser = auth.getCurrentUser();
                             assert currentUser != null;
                             String currentUserId = currentUser.getUid();
 
                             //Create a UserMap so we can create a user in the User collection
                             Map<String, String> userObj = new HashMap<>();
+
                             userObj.put("userId",currentUserId);
                             userObj.put("username",username);
+                            userObj.put("password",password);
+                            userObj.put("money","0");
 
                             //Save to firestore
                             collectionReference.add(userObj)
@@ -113,10 +118,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                                                         foodApi.setUserId(currentUserId);
                                                         foodApi.setUsername(name);
 
-//                                                        Intent intent = new Intent(CreateAccountActivity.this, PostJournalActivity.class);
-//                                                        intent.putExtra("username", name);
-//                                                        intent.putExtra("userId", currentUserId);
-//                                                        startActivity(intent);
+                                                        Intent intent = new Intent(CreateAccountActivity.this, OrderingActivity.class);
+                                                        intent.putExtra("username", name);
+                                                        intent.putExtra("userId", currentUserId);
+                                                        startActivity(intent);
                                                     }else {
 
                                                     }

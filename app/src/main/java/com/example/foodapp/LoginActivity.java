@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                     foodApi.setUsername(snapshot.getString("username"));
                                     foodApi.setUserId(snapshot.getString("userId"));
 
-                                    startActivity(new Intent(LoginActivity.this, FoodListActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, OrderingActivity.class));
 
                                     //finish();
                                 }

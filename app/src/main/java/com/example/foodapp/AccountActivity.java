@@ -3,7 +3,6 @@ package com.example.foodapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.foodapp.databinding.ActivityFoodListBinding;
+import com.example.foodapp.databinding.ActivityAccountBinding;
 import com.example.foodapp.databinding.ActivityOrderingBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -29,8 +30,8 @@ import java.util.List;
 import Model.Order;
 import Model.User;
 
-public class OrderingActivity extends AppCompatActivity {
-    ActivityOrderingBinding binding;
+public class AccountActivity extends AppCompatActivity {
+    ActivityAccountBinding binding;
 
     FirebaseAuth auth;
     FirebaseAuth.AuthStateListener authStateListener;
@@ -39,25 +40,16 @@ public class OrderingActivity extends AppCompatActivity {
 
     private CollectionReference collectionReference = db.collection("Users");
 
-    private List<Order> orderList = new ArrayList<>();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ordering);
+        setContentView(R.layout.activity_account);
+
 
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_ordering);
-
-        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, OrderingActivity.class)));
-        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, FoodListActivity.class)));
-        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, AccountActivity.class)));
-        binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(OrderingActivity.this, SettingsActivity.class)));
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_account);
 
         collectionReference.whereEqualTo("userId", FoodApi.getInstance()
                         .getUserId())
@@ -69,13 +61,21 @@ public class OrderingActivity extends AppCompatActivity {
                         if(!queryDocumentSnapshots.isEmpty()){
                             for (QueryDocumentSnapshot users : queryDocumentSnapshots){
                                 User user = users.toObject(User.class);
-                                binding.tvGreetings.setText("Hi "+ user.getUsername()+"!");
+                                binding.tvEmailKontaText.setText(auth.getCurrentUser().getEmail());
+                                binding.tvNazwaKontaText.setText(user.getUsername());
+                                binding.tvSrodkiKontaText.setText(user.getMoney());
+                                binding.tvHasloKontaText.setText(user.getPassword());
                             }
 
                         }else {
                         }
                     }
-                }).addOnFailureListener(e -> Toast.makeText(OrderingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(AccountActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show());
+
+        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, OrderingActivity.class)));
+        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, FoodListActivity.class)));
+        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, AccountActivity.class)));
+        binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(AccountActivity.this, SettingsActivity.class)));
 
 
     }
@@ -107,5 +107,4 @@ public class OrderingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -5,11 +5,11 @@
         android:icon="@android:drawable/ic_lock_silent_mode_off"
         android:title="AudioMode"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_food"
-        android:icon="@drawable/ic_orderfood_white"
-        android:title="food"
-        app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/action_food"-->
+<!--        android:icon="@drawable/ic_orderfood_white"-->
+<!--        android:title="food"-->
+<!--        app:showAsAction="ifRoom" />-->
 
     <item
         android:id="@+id/action_signout"

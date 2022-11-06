@@ -53,6 +53,11 @@ public class FoodListActivity extends AppCompatActivity {
 
         binding.rvList.setHasFixedSize(true);
         binding.rvList.setLayoutManager(new LinearLayoutManager(this));
+
+        binding.ivOrderFood.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, OrderingActivity.class)));
+        binding.ivListOfOrders.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, FoodListActivity.class)));
+        binding.ivAccount.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, AccountActivity.class)));
+        binding.ivSettings.setOnClickListener(view -> startActivity(new Intent(FoodListActivity.this, SettingsActivity.class)));
     }
 
     @Override
@@ -84,6 +89,7 @@ public class FoodListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
 
         collectionReference.whereEqualTo("userId", FoodApi.getInstance()
                     .getUserId())
