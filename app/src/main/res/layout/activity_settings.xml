@@ -12,6 +12,115 @@
         android:layout_height="match_parent"
         tools:context=".SettingsActivity">
 
+        <TextView
+            android:id="@+id/tvSoundLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="In-App Sound Level"
+            android:textColor="#0E0000"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/swSilentMode" />
+
+        <SeekBar
+            android:id="@+id/sbSoundLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvSoundLevel" />
+
+        <TextView
+            android:id="@+id/tvSettingsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Settings"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSettingsText"
+            app:srcCompat="@drawable/ic_logout" />
+
+        <Switch
+            android:id="@+id/swLogout"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="Logout on exit"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivLogout"
+            app:layout_constraintTop_toBottomOf="@+id/tvSettingsText" />
+
+        <ImageView
+            android:id="@+id/ivNightTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogout"
+            app:srcCompat="@drawable/ic_night_mode" />
+
+        <Switch
+            android:id="@+id/swNightTheme"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="4dp"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="Night Theme"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivNightTheme"
+            app:layout_constraintTop_toBottomOf="@+id/swLogout" />
+
+        <ImageView
+            android:id="@+id/ivSilentMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivNightTheme"
+            app:srcCompat="@drawable/ic_silent_mode" />
+
+        <Switch
+            android:id="@+id/swSilentMode"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="4dp"
+            android:padding="10dp"
+            android:paddingTop="10dp"
+            android:text="Silent Mode"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivSilentMode"
+            app:layout_constraintTop_toBottomOf="@+id/swNightTheme" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
