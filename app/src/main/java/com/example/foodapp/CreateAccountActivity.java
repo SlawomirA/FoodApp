@@ -101,6 +101,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             userObj.put("username",username);
                             userObj.put("password",password);
                             userObj.put("money","0");
+                            userObj.put("imageURL","0");
 
                             //Save to firestore
                             collectionReference.add(userObj)

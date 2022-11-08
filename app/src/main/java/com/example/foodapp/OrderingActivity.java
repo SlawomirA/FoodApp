@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +72,11 @@ public class OrderingActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot users : queryDocumentSnapshots){
                                 User user = users.toObject(User.class);
                                 binding.tvGreetings.setText("Hi "+ user.getUsername()+"!");
+                                Picasso.get()
+                                        .load(Uri.parse(user.getImageURL()))
+                                        .placeholder(R.drawable.ic_accountimage)
+                                        .fit()
+                                        .into(binding.ivOrderAccountImage);
                             }
 
                         }else {
